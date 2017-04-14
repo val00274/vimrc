@@ -1,0 +1,181 @@
+# base
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+	let g:dein#plugin.build = 'make'
+'''
+
+# neocomplete
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+hook_add = '''
+  let g:acp_enableAtStartup = 0
+  " 起動時に有効化
+  let g:neocomplete#enable_at_startup = 1
+  " 大文字が入力されるまで大文字小文字の区別を無視する
+  let g:neocomplete#enable_smart_case = 1
+  " _(アンダースコア)区切りの補完を有効化
+  let g:neocomplete#enable_underbar_completion = 1
+  let g:neocomplete#enable_camel_case_completion  =  1
+  " ポップアップメニューで表示される候補の数
+  let g:neocomplete#max_list = 20
+  " シンタックスをキャッシュするときの最小文字長
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  " 補完を表示する最小文字数
+  let g:neocomplete#auto_completion_start_length = 2
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+hook_add = '''
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  if has('conceal')
+    set conceallevel=2 concealcursor=i
+  endif
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+hook_add = '''
+  let g:neosnippet#snippets_directory='~/.vim/snippets'
+'''
+
+# unite
+[[plugins]]
+repo = 'Shougo/unite.vim'
+hook_add = '''
+	command! -nargs=? PopupTags :Unite tag:<args>
+	function! s:get_func_name(word)
+		let end = match(a:word, '<\|[\|(')
+		return end == -1 ? a:word : a:word[ : end-1 ]
+	endfunction
+
+	nnoremap <silent> ,uf :<C-u>Unite file<CR>i
+	nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+	nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+	nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+	nnoremap <silent> ,,  :<C-u>Unite buffer file_mru<CR>
+	nnoremap <silent> ,uo :<C-u>Unite outline<CR>
+	nnoremap <silent> ,ut :<C-u>Unite tag<CR>
+	nnoremap <silent> ,ug :<C-u>Unite git_cached<CR>
+
+	let g:unite_split_rule = 'botright'
+'''
+
+[[plugins]]
+repo = 'Shougo/unite-build'
+
+[[plugins]]
+repo ='taka84u9/unite-git'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+# design
+[[plugins]]
+repo = 'wombat256.vim'
+[[plugins]]
+repo = 'altercation/vim-colors-solarized'
+
+# utility
+[[plugins]]
+repo = 'surround.vim'
+
+[[plugins]]
+repo = 'tpope/vim-abolish'
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+  function! GgrepCword()
+    Ggrep "\<<cword>\>"
+  endfunction
+  command! GgrepCword :call GgrepCword()
+  nnoremap + :GgrepCword<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'Lokaltog/vim-powerline'
+
+[[plugins]]
+repo = 'sjl/gundo.vim'
+
+[[plugins]]
+repo = 'mbbill/undotree'
+hook_add = '''
+  nnoremap C-u :UndotreeToggle<CR>
+  let g:undotree_WindowLayout = 4
+  let g:undotree_SetFocusWhenToggle = 1
+'''
+
+[[plugins]]
+repo = 'jeaye/color_coded'
+build = 'cmake . && make && make install'
+hook_add = '''
+  let g:color_coded_filetypes = ['c', 'cpp', 'objc', 'objcpp']
+'''
+
+[[plugins]]
+repo = 'ujihisa/shadow.vim'
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_add = '''
+	let g:EasyMotion_do_mapping = 0
+	let g:EasyMotion_enter_jump_first = 1
+	let g:EasyMotion_space_jump_first = 1
+
+	nmap s <Plug>(easymotion-overwin-f2)
+	vmap s <Plug>(easymotion-bd-f2)
+	map  f <Plug>(easymotion-bd-f)
+	nmap f <Plug>(easymotion-overwin-f)
+	map  t <Plug>(easymotion-bd-tl)
+	map  F <Plug>(easymotion-bd-Fl)
+	nmap F <Plug>(easymotion-overwin-f)))
+	nmap T <Plug>(easymotion-T)
+
+	nmap g/ <Plug>(easymotion-sn)
+	xmap g/ <Plug>(easymotion-sn)
+	omap g/ <Plug>(easymotion-tn)
+
+	nmap <Leader><Leader> <Plug>(easymotion-repeat)
+	nmap <C-n> <Plug>(easymotion-next)
+	nmap <C-p> <Plug>(easymotion-prev)
+'''
+
+[[plugins]]
+repo = 'val00274/vim-cpp-namespace'
+
+# lang
+[[plugins]]
+repo = 'vim-jp/cpp-vim'
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+[[plugins]]
+repo = 'vpp.vim'
+[[plugins]]
+repo = "aklt/plantuml-syntax"
+[[plugins]]
+repo = 'cespare/vim-toml'
+[[plugins]]
+repo = 'fatih/vim-go'
+[[plugins]]
+repo = 'dart-lang/dart-vim-plugin'
